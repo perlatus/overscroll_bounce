@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 const _style = const TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0);
 
 Widget _buildCard(BuildContext ctx, int i) {
-  if (i > 15) {
+  if (i > 50) {
     return null;
-  } else if (i == 15) {
+  } else if (i == 50) {
     return new Card(child: new Container(color: Colors.red));
   } else if (i == 0) {
     return new Card(child: new Container(color: Colors.green));
@@ -16,11 +16,13 @@ Widget _buildCard(BuildContext ctx, int i) {
 }
 
 void main() {
-  runApp(
-    new MaterialApp(
-      home: new Scaffold(
-        body: new ListView.builder(itemExtent: 400.0, itemBuilder: _buildCard),
+  runApp(new MaterialApp(
+    home: new Scaffold(
+      body: new GridView.custom(
+        gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 150.0, childAspectRatio: 3 / 5),
+        childrenDelegate: new SliverChildBuilderDelegate(_buildCard),
       ),
     ),
-  );
+  ));
 }
